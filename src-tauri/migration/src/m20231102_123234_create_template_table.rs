@@ -21,17 +21,25 @@ impl MigrationTrait for Migration {
                             .auto_increment(),
                     )
                     .col(ColumnDef::new(Template::Name).string().not_null())
-                    .col(ColumnDef::new(Template::FontSize).integer())
                     .col(ColumnDef::new(Template::Font).string())
-                    .col(ColumnDef::new(Template::BackgroundURL).string())
+                    .col(ColumnDef::new(Template::FontSize).integer())
                     .col(
                         ColumnDef::new(Template::FontWeight)
                             .enumeration(FontWeight::Table, FontWeight::iter().skip(1)),
                     )
-                    .col(ColumnDef::new(Template::BackgroundType).enumeration(
-                        BackgroundType::Table,
-                        [BackgroundType::Image, BackgroundType::Video],
-                    ))
+                    .col(
+                        ColumnDef::new(Template::VerticalAlignment)
+                            .enumeration(Alignment::Table, Alignment::iter().skip(1)),
+                    )
+                    .col(
+                        ColumnDef::new(Template::HorizontalAlignment)
+                            .enumeration(Alignment::Table, Alignment::iter().skip(1)),
+                    )
+                    .col(ColumnDef::new(Template::BackgroundURL).string())
+                    .col(
+                        ColumnDef::new(Template::BackgroundType)
+                            .enumeration(BackgroundType::Table, BackgroundType::iter().skip(1)),
+                    )
                     .to_owned(),
             )
             .await
@@ -42,6 +50,14 @@ impl MigrationTrait for Migration {
             .drop_table(Table::drop().table(Template::Table).to_owned())
             .await
     }
+}
+
+#[derive(Iden, EnumIter)]
+enum Alignment {
+    Table,
+    Start,
+    Center,
+    End,
 }
 
 #[derive(Iden, EnumIter)]
@@ -70,6 +86,8 @@ enum Template {
     Font,
     FontSize,
     FontWeight,
+    VerticalAlignment,
+    HorizontalAlignment,
     BackgroundURL,
     BackgroundType,
 }

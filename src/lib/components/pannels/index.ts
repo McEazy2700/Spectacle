@@ -1,6 +1,8 @@
 export * from './views';
 export * from './select';
 export * from './template';
-export { default as PannelShell } from './PannelShell.svelte';
-export { default as SpectaclePannel } from './SpectaclePannel.svelte';
+export * from "./schedule";
+export * from "./exporer";
 export { default as ActivePannel } from './ActivePannel.svelte';
+export { default as OpenPannels } from './OpenPannels.svelte';
+export { default as Pannel } from './Pannel.svelte';

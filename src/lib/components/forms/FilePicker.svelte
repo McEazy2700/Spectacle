@@ -10,6 +10,7 @@
 		IconButton
 	} from '../elements';
 	import { createEventDispatcher } from 'svelte';
+	import { ArrowLeftSolid } from 'flowbite-svelte-icons';
 
 	export let fileType: 'Image' | 'Audio' | 'Video';
 	export let size: 'normal' | 'small' = 'normal';
@@ -80,14 +81,15 @@
 
 <div
 	role="dialog"
-	class="relative border border-gray-400/10 w-full h-[40vh] overflow-auto bg-black/20 rounded-lg ml-0.5 p-1 z-0"
+	class="relative border border-gray-400/10 w-full h-full min-h-[40vh] overflow-auto rounded-lg ml-0.5 p-1 z-0"
 >
 	<IconButton
 		on:click={handleBackNavigate}
 		disabled={navHistory.length < 2}
-		class="absolute p-0.5 px-1 left-0 top-0 backdrop-blur"
-		variant="back"
-	/>
+		class="absolute p-0.5 transition-all hover:scale-125 px-1 left-0 top-0 backdrop-blur"
+	>
+		<ArrowLeftSolid />
+	</IconButton>
 	{#if loading}
 		<div class="w-full h-full flex items-center justify-center">
 			<SpectacleSpinner />
@@ -103,7 +105,7 @@
 					? 'grid-cols-4'
 					: 'grid-cols-3 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6'
 			}
-        grid w-full
+        grid w-full overflow-x-hidden
       `}
 		>
 			{#each directories as path}

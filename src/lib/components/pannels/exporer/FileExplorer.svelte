@@ -33,7 +33,7 @@
 				class="rounded-tr-none border-t-0">Audio</FolderButton
 			>
 		</div>
-		<div class="flex-1 min-h-full">
+		<div class="flex-1 max-h-[75vh] overflow-x-hidden overflow-y-auto min-h-full">
 			{#if mediaType === 'Image'}
 				<FilePicker on:select={handleSelect} bind:size fileType="Image" />
 			{:else if mediaType === 'Video'}

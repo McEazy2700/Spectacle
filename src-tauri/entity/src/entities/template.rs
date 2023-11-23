@@ -9,10 +9,12 @@ pub struct Model {
     #[sea_orm(primary_key)]
     pub id: i32,
     pub name: String,
-    pub font_size: Option<i32>,
     pub font: Option<String>,
-    pub background_url: Option<String>,
+    pub font_size: Option<i32>,
     pub font_weight: Option<String>,
+    pub vertical_alignment: Option<String>,
+    pub horizontal_alignment: Option<String>,
+    pub background_url: Option<String>,
     pub background_type: Option<String>,
 }
 

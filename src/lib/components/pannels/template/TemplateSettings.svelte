@@ -2,7 +2,6 @@
 	import { invoke } from '@tauri-apps/api/tauri';
 	import { Button, Dropdown, DropdownItem, Input, Modal, P, Spinner } from 'flowbite-svelte';
 	import { scale, slide } from 'svelte/transition';
-	import MediaSelectPannel from '../select/MediaSelectPannel.svelte';
 	import { convertFileSrc } from '$lib/utils/media';
 	import type { FontWeight } from '$lib/types';
 	import { videoExtensions } from '$lib/constants/extensions';
@@ -115,5 +114,4 @@
 </form>
 
 <Modal class="pt-5" transition={scale} on:close={() => (bgPickerOpen = false)} open={bgPickerOpen}>
-	<MediaSelectPannel on:select={setBg} size="small" />
 </Modal>

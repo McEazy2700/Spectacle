@@ -28,6 +28,10 @@ dotenv = "0.15.0"
 anyhow = "1.0.75"
 actix-web = "4.4.0"
 actix-files = "0.6.2"
+reqwest = { version = "0.11.22", features = ["json", "blocking"] }
+zip-extract = "0.1.2"
+regex = "1.10.2"
+tokio = { version = "1.34.0", features = ["full"] }
 
 [dependencies.sea-orm]
 version = "0.12"

@@ -7,7 +7,7 @@
 	let show = true;
 </script>
 
-<div class="relative shadow rounded-md z-0">
+<div class="relative shadow rounded-md z-[1000]">
 	{#if show}
 		<Toolbar class="z-20" transition={slide} embedded={false} color="dark">
 			<div class="flex items-center justify-between w-screen max-w-[98vw]">

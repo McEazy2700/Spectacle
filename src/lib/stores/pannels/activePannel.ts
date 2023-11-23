@@ -1,4 +1,4 @@
-import type { Pannel } from '$lib/types';
+import type { Pannel } from '$lib/models/pannels';
 import { writable } from 'svelte/store';
 
 interface ActivePannel {

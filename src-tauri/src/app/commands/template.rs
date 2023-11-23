@@ -1,4 +1,4 @@
-use crate::app::models::template::{BgType, FontWeight};
+use crate::app::models::template::{BackgroundType, FontWeight};
 use crate::{
     app::{models::template::TemplateOption, state::DB},
     common::errors::AppError,
@@ -37,7 +37,9 @@ async fn new_template(conn: &DbConn, opts: TemplateOption) -> Result<template::M
         )),
         background_url: Set(opts.background_url),
         background_type: Set(Some(
-            opts.background_type.unwrap_or(BgType::Image).to_string(),
+            opts.background_type
+                .unwrap_or(BackgroundType::Image)
+                .to_string(),
         )),
         ..Default::default()
     };

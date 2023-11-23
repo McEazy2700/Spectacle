@@ -24,7 +24,7 @@
 		"eslint-plugin-svelte": "^2.30.0",
 		"flowbite": "^1.8.1",
 		"flowbite-svelte": "^0.44.18",
-		"postcss": "^8.4.24",
+		"postcss": "^8.4.31",
 		"postcss-load-config": "^4.0.1",
 		"prettier": "^2.8.0",
 		"prettier-plugin-svelte": "^2.10.1",
@@ -32,7 +32,7 @@
 		"svelte-check": "^3.4.3",
 		"tailwindcss": "^3.3.2",
 		"tslib": "^2.4.1",
-		"typescript": "^5.0.0",
+		"typescript": "^5.0.2",
 		"vite": "^4.4.2"
 	},
 	"type": "module",
@@ -45,7 +45,8 @@
 		"@tiptap/extension-text-style": "^2.1.12",
 		"@tiptap/extension-underline": "^2.1.12",
 		"@tiptap/starter-kit": "^2.1.12",
-		"tailwind-merge": "^1.14.0",
+		"flowbite-svelte-icons": "^0.4.5",
+		"tailwind-merge": "2.0.0",
 		"tiptap-extension-font-size": "^1.2.0"
 	}
 }

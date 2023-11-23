@@ -1,49 +1,41 @@
 <script lang="ts">
-	import { Template } from '$lib/classes/views';
 	import { TemplateWraper } from '$lib/components/templates';
-	import type { FontWeight } from '$lib/types';
+	import type { FontWeight, TemplateType } from '$lib/types';
 	import { TemplateSettings } from '.';
 
-	let templateId: number | undefined = undefined;
-	let templateName: string | undefined = undefined;
-	let font: string | undefined = undefined;
-	let fontSize: number | undefined = undefined;
-	let fontWeight: FontWeight | undefined = undefined;
-	let backgroundType: 'Video' | 'Image' = 'Image';
-	let backgroundURL: string | undefined = undefined;
+	// let templateId: number | undefined = $activeTemplate.id;
+	// let templateName: string | undefined = $activeTemplate.name;
+	// let font: string | undefined = $activeTemplate.font;
+	// let fontSize: number | undefined = $activeTemplate.font_size;
+	// let fontWeight: FontWeight | undefined = $activeTemplate.font_weight;
+	// let backgroundType: 'Video' | 'Image' = $activeTemplate.background_type ?? 'Image';
+	// let backgroundURL: string | undefined = $activeTemplate.background_url;
 
-	$: template = new Template({ font, fontSize, fontWeight, backgroundType, backgroundURL });
+	let template: TemplateType;
+
+	// $: {
+	// 	template = {
+	// 		font,
+	// 		id: templateId,
+	// 		name: templateName,
+	// 		font_size: fontSize,
+	// 		font_weight: fontWeight,
+	// 		background_type: backgroundType,
+	// 		background_url: backgroundURL
+	// 	};
+	// }
 </script>
 
 <div class="border gap-3 p-2 flex w-full border-black/10 dark:border-white/10 rounded">
 	<div class="flex-1 w-full aspect-video">
-		<TemplateWraper bind:template>
-			<div>
-				<p
-					style={`font-size: ${fontSize}px;`}
-					class={`${
-						fontWeight === 'Light'
-							? 'font-light'
-							: fontWeight === 'SemiBold'
-							? 'font-semibold'
-							: fontWeight === 'Bold'
-							? 'font-bold'
-							: fontWeight === 'ExtraBold'
-							? 'font-extrabold'
-							: ''
-					}`}
-				>
-					Text
-				</p>
-			</div>
-		</TemplateWraper>
+		<TemplateWraper bind:template>Text</TemplateWraper>
 	</div>
-	<TemplateSettings
-		bind:fontSize
-		bind:fontWeight
-		bind:templateName
-		bind:templateId
-		bind:backgroundURL
-		bind:backgroundType
-	/>
+	<!-- <TemplateSettings -->
+	<!-- 	bind:fontSize -->
+	<!-- 	bind:fontWeight -->
+	<!-- 	bind:templateName -->
+	<!-- 	bind:templateId -->
+	<!-- 	bind:backgroundURL -->
+	<!-- 	bind:backgroundType -->
+	<!-- /> -->
 </div>

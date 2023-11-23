@@ -1,28 +1,14 @@
 <script lang="ts">
 	import { listen } from '@tauri-apps/api/event';
-	import { StandbyView, View as ViewComponent, SermonViewDisplay } from '.';
-	import { TemplateWraper } from '$lib/components/templates';
-	import { Template, type SermonView, type View } from '$lib/classes/views';
+  import { Slide } from "$lib/components/slides"
+	import type { SlideType } from '$lib/models/slide';
 
-	let template: Template = new Template();
-	let sermonView: SermonView | undefined = undefined;
-	let klass = '';
-	export { klass as class };
+  let liveSlide: SlideType | undefined = undefined
 
-	listen('presentation-update', (e) => {
-		const view = (e.payload as { view: View }).view;
-		if (view.name === 'Sermon') {
-			sermonView = view.data as SermonView;
-		}
+  export let size: "xs" | "sm" | "md" | "lg" | "full" = "full"
+  export let bordered = false;
+	listen('state-update', (e) => {
 	});
 </script>
 
-<TemplateWraper bind:template>
-	<ViewComponent bind:class={klass}>
-		{#if sermonView}
-			<SermonViewDisplay bind:sermonView />
-		{:else}
-			<StandbyView />
-		{/if}
-	</ViewComponent>
-</TemplateWraper>
+<Slide {bordered} {size} slide={liveSlide}/>

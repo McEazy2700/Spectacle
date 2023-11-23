@@ -1,21 +1,11 @@
 <script lang="ts">
-	import { PannelBar, Toolbar } from '$lib/components/utils';
-	import { ActivePannel, SelectPannels } from '$lib/components/pannels';
-	import { LiveView } from '$lib/components/views';
+	import { OpenPannels, Sidebar, Toolbar } from '$lib/components';
 </script>
 
-<div class="flex flex-col min-h-screen">
+<div class="h-screen max-h-screen overflow-hidden overflow-y-auto">
 	<Toolbar />
-	<div class="mt-7 flex-1 flex w-full gap-2">
-		<ActivePannel />
-		<div
-			class="max-w-xs border shadow-md aspect-video border-black/10 dark:border-white/10 rounded"
-		>
-			<LiveView class="scale-[0.3] w-[1080px] origin-top-left" />
-		</div>
+	<div class="p-1 h-full">
+		<OpenPannels />
 	</div>
-	<PannelBar />
-	<div class="mt-3">
-		<SelectPannels />
-	</div>
+  <Sidebar />
 </div>

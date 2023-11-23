@@ -1,7 +1,7 @@
 <script lang="ts">
-	import Icon from '@iconify/svelte';
 	import { createEventDispatcher } from 'svelte';
 	import { ThumbnailButton } from '../buttons';
+	import { FolderSolid } from 'flowbite-svelte-icons';
 
 	export let path: string;
 	let folderName = path.split('/')[path.split('/').length - 2];
@@ -14,5 +14,7 @@
 </script>
 
 <ThumbnailButton on:click={handleSelect} name={folderName}>
-	<Icon class="w-full aspect-video text-[7rem] text-gray-400" icon="bi:folder-fill" />
+	<div class="flex items-center justify-center w-full h-full p-3">
+		<FolderSolid class="w-24 h-24" />
+	</div>
 </ThumbnailButton>

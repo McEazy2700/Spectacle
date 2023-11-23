@@ -1,13 +1,13 @@
 <script lang="ts">
 	import { IconButton, TemplateButton } from '$lib/components/elements';
-	import activePannel from '$lib/stores/pannels/activePannel';
+	// import activePannel from '$lib/stores/pannels/activePannel';
 	import { invoke } from '@tauri-apps/api';
 	import { onMount } from 'svelte';
 	import type { TemplateType } from '$lib/types';
+	import { PlusSolid } from 'flowbite-svelte-icons';
 
 	let templates: TemplateType[] = [];
 	function handleAdd() {
-		activePannel.set({ type: 'Template' });
 	}
 
 	onMount(() => {
@@ -23,5 +23,7 @@
 			<TemplateButton {template} />
 		{/each}
 	</ul>
-	<IconButton class="self-center" on:click={handleAdd} variant="add" />
+	<IconButton class="self-center" on:click={handleAdd} >
+    <PlusSolid />
+	</IconButton>
 </div>

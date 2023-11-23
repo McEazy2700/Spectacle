@@ -2,6 +2,7 @@
 	import { createEventDispatcher } from 'svelte';
 	import { IconButton } from '$lib/components/elements';
 	import { fly } from 'svelte/transition';
+	import { FileEditSolid } from 'flowbite-svelte-icons';
 
 	export let content: string;
 	export let slideId: number;
@@ -21,7 +22,9 @@
     border border-black/10 dark:border-white/10 p-4 rounded
   `}
 >
-	<IconButton class="absolute top-1 right-1" on:click={handleEdit} variant="edit" />
+	<IconButton class="absolute top-1 right-1" on:click={handleEdit}>
+    <FileEditSolid />
+	</IconButton>
 	<div class="w-[1080] origin-top-left aspect-video">
 		<!-- eslint-disable-next-line svelte/no-at-html-tags -->
 		{@html content}

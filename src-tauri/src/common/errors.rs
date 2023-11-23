@@ -1,7 +1,10 @@
+use sea_orm::{DbConn, DbErr};
 use serde::{Deserialize, Serialize};
-use std::{fmt::Display, io};
-
-use sea_orm::DbErr;
+use std::{
+    fmt::Display,
+    io,
+    sync::{MutexGuard, PoisonError},
+};
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct AppError {
@@ -56,6 +59,38 @@ impl From<anyhow::Error> for AppError {
 
 impl From<DbErr> for AppError {
     fn from(value: DbErr) -> Self {
+        Self {
+            message: value.to_string(),
+        }
+    }
+}
+
+impl From<tauri::Error> for AppError {
+    fn from(value: tauri::Error) -> Self {
+        Self {
+            message: value.to_string(),
+        }
+    }
+}
+
+impl From<reqwest::Error> for AppError {
+    fn from(value: reqwest::Error) -> Self {
+        Self {
+            message: value.to_string(),
+        }
+    }
+}
+
+impl From<PoisonError<MutexGuard<'_, DbConn>>> for AppError {
+    fn from(value: PoisonError<MutexGuard<'_, DbConn>>) -> Self {
+        Self {
+            message: value.to_string(),
+        }
+    }
+}
+
+impl From<regex::Error> for AppError {
+    fn from(value: regex::Error) -> Self {
         Self {
             message: value.to_string(),
         }

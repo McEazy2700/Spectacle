@@ -5,13 +5,18 @@ pub mod app;
 pub mod common;
 pub mod server;
 
-use app::commands::{
-    media::scan_media_dir,
-    template::{get_templates, save_template},
+use app::commands::media::scan_media_dir;
+use app::commands::scripture::download::{
+    cleanup_temp, create_bible_db, download_bible, extract_bible_zip, parse_bible_sql,
 };
+use app::commands::scripture::{download_kjv_bible, get_downloaded_bible_versions};
+use app::commands::template::{get_templates, save_template};
+use app::commands::view::{get_live_view, set_live_view};
+use app::state::{BibleDB, Live};
 use app::{config::db, state::DB};
 use migration::{Migrator, MigratorTrait};
-use std::thread;
+use std::{collections::HashMap, thread};
+use tokio::sync::Mutex;
 use tauri::async_runtime::block_on;
 
 fn main() {
@@ -33,10 +38,25 @@ fn main() {
             Ok(())
         })
         .manage(DB { conn: db_conn })
+        .manage(BibleDB {
+            conns: Mutex::new(HashMap::new()),
+        })
+        .manage(Live {
+            view: std::sync::Mutex::new(None),
+        })
         .invoke_handler(tauri::generate_handler![
             scan_media_dir,
             save_template,
-            get_templates
+            get_templates,
+            set_live_view,
+            get_live_view,
+            download_kjv_bible,
+            get_downloaded_bible_versions,
+            download_bible,
+            extract_bible_zip,
+            parse_bible_sql,
+            create_bible_db,
+            cleanup_temp
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
