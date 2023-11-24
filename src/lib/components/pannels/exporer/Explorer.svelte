@@ -5,7 +5,7 @@
 	import { ScriptureExplorer } from './scripture';
 </script>
 
-<Pannel class="min-h-[50vh] h-full">
+<Pannel id="explore-pannels" class="flex-1 overflow-auto min-h-[30%]">
 	<Tabs style="underline">
 		<TabItem class="h-full" open>
 			<div class="flex items-center gap-2" slot="title">

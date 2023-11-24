@@ -2,7 +2,6 @@
 	import type { SlideType } from '$lib/models/slide';
 	import { draggable } from '$lib/actions/dnd';
 	import { SpectacleSlide } from '.';
-	import { fade } from 'svelte/transition';
 	import { onDestroy, onMount } from 'svelte';
 
 	export let slide: SlideType | undefined = undefined;
@@ -31,13 +30,13 @@
 </script>
 
 <div
-	class={`w-full aspect-video rounded-lg
+	class={`aspect-video rounded-lg p-4 transition-all
     ${size === 'xs' ? 'max-w-xs' : size === 'sm' ? 'max-w-sm' : ''}
     ${bordered ? 'border border-black/20 dark:border-white/20' : ''}
   `}
 	bind:this={containerElement}
 >
-	<div bind:this={slideElement} class="aspect-video flex items-center">
+	<div bind:this={slideElement} class="flex h-full w-full items-center">
 		{#if !slide}
 			<SpectacleSlide />
 		{:else}

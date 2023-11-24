@@ -1,16 +1,14 @@
 <script lang="ts">
 	import openPannels from '$lib/stores/pannels/openPannels';
-	import { ActivePannel, Explorer, Schedule } from '$lib/components/pannels';
+	import { ActivePannel, Explorer, Resize, Schedule } from '$lib/components/pannels';
 	import { LiveView } from '../views';
 </script>
 
 <div class="min-w-full flex flex-col h-screen">
-	<div class="flex mb-2 flex-1 h-full justify-between w-full gap-2 items-start">
-		<div>
-			{#if $openPannels.includes('Schedule')}
-				<Schedule />
-			{/if}
-		</div>
+	<div id="work-pannels" class="flex p-3 mb-2 min-h-[20%] justify-between w-full gap-2 items-start">
+		{#if $openPannels.includes('Schedule')}
+			<Schedule />
+		{/if}
 		{#if $openPannels.includes('Preview')}
 			<ActivePannel />
 		{/if}
@@ -20,9 +18,8 @@
 			</div>
 		{/if}
 	</div>
+	<Resize itemId="work-pannels" direction="vertical" />
 	{#if $openPannels.includes('Explorer')}
-    <div class="flex-1 h-full">
-    <Explorer />
-    </div>
-  {/if}
+		<Explorer />
+	{/if}
 </div>

@@ -1,8 +1,8 @@
 <script>
-	import Icon from '@iconify/svelte';
 	import { Button, DarkMode, Toolbar } from 'flowbite-svelte';
 	import { slide } from 'svelte/transition';
 	import { GoLive } from '.';
+	import { AngleDownSolid, AngleUpSolid } from 'flowbite-svelte-icons';
 
 	let show = true;
 </script>
@@ -28,9 +28,10 @@
       transition-all text-black dark:text-white dark:bg-gray-800 -z-10 right-5 -bottom-6
     `}
 	>
-		<Icon
-			class="text-xl"
-			icon={show ? 'iconamoon:arrow-up-2-duotone' : 'iconamoon:arrow-down-2-duotone'}
-		/>
+		{#if show}
+			<AngleUpSolid class="w-3 h-3" />
+		{:else}
+			<AngleDownSolid class="w-3 h-3" />
+		{/if}
 	</Button>
 </div>

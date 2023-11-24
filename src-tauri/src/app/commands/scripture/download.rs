@@ -89,7 +89,11 @@ pub fn parse_bible_sql(folder_name: String) -> Result<String, AppError> {
             continue;
         }
         if original_line.trim().starts_with("DROP TABLE") {
-            let to_replace = original_line.trim().split_once("EXISTS").unwrap().1;
+            let to_replace = original_line
+                .trim()
+                .split_once("EXISTS")
+                .unwrap_or(("", ""))
+                .1;
             let modified = original_line.replace(to_replace, " bible;");
             writeln!(output_file, "{}", modified)?;
         } else if original_line.trim().starts_with("CREATE") {

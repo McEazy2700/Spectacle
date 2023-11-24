@@ -35,7 +35,7 @@
 	}
 </script>
 
-<div class="flex items-center gap-4">
+<div class="flex min-h-full items-center gap-4">
 	<div class="flex flex-col gap-2">
 		<div>
 			<BibleVersion

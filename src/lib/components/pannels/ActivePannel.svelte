@@ -4,11 +4,11 @@
 	import { Slide } from '../slides';
 </script>
 
-<Pannel>
+<Pannel video class="!aspect-video">
 	{#if $activePannel}
-		<div class="p-1 w-full aspect-video flex-1">
-				<!-- <SermonViewPannel /> -->
-				<!-- <TemplatePannel /> -->
+		<div class="p-1 flex-1">
+			<SermonViewPannel />
+			<TemplatePannel />
 		</div>
 	{:else}
 		<Slide size="lg" />
