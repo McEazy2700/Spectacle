@@ -16,24 +16,24 @@
 		</TabItem>
 		<TabItem class="h-full">
 			<div class="flex items-center gap-2" slot="title">
-        <OpenBookSolid />
+				<OpenBookSolid />
 				Scripture
 			</div>
-      <ScriptureExplorer />
+			<ScriptureExplorer />
 		</TabItem>
 		<TabItem class="h-full">
 			<div class="flex items-center gap-2" slot="title">
-        <PenSolid />
+				<PenSolid />
 				Sermon
 			</div>
-      Sermon
+			Sermon
 		</TabItem>
 		<TabItem class="h-full">
 			<div class="flex items-center gap-2" slot="title">
-        <ListMusicSolid />
+				<ListMusicSolid />
 				Song
 			</div>
-      Song
+			Song
 		</TabItem>
 	</Tabs>
 </Pannel>

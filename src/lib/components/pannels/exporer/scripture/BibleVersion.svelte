@@ -1,37 +1,43 @@
 <script lang="ts">
 	import { invoke } from '@tauri-apps/api';
+	import { createEventDispatcher } from 'svelte';
 	import { Button, Dropdown, DropdownItem, Heading, Modal, Spinner } from 'flowbite-svelte';
 	import { DownloadSolid } from 'flowbite-svelte-icons';
 	import { onMount } from 'svelte';
 	import { scale, slide } from 'svelte/transition';
-	import { BIBLE_VERSIONS } from '$lib/constants/bible';
+	import { BIBLE_VERSIONS, type BibleVersion } from '$lib/constants/bible';
+	import alerts from '$lib/stores/alerts';
+
+	const dispatch = createEventDispatcher<{ select: BibleVersion }>();
 
 	type DownloadingItem = { version: string; status: boolean; statusText: string };
-	let active = '';
+	export let activeBibleVersion: string;
 	let downloaded: string[] = [];
 	let downloading: DownloadingItem | undefined;
 	let extractedDir: string | undefined = undefined;
+
+	$: activeBible = BIBLE_VERSIONS.filter((b) => b.version == activeBibleVersion)[0];
 
 	function get_donwloaded_bibles() {
 		invoke('get_downloaded_bible_versions')
 			.then((res) => {
 				downloaded = res as string[];
-				active = downloaded[0].toUpperCase();
+				activeBible = BIBLE_VERSIONS.filter((bible) => bible.id === downloaded[0].toUpperCase())[0];
 			})
-			.catch((err) => console.log(err));
+			.catch((err) => alerts.add({ message: err.message ?? '', kind: 'error' }));
 	}
 
 	onMount(() => {
 		get_donwloaded_bibles();
 	});
 
-	function handleSetBible({ version, url }: { version: string; url: string }) {
+	function handleSetBible(bible: BibleVersion) {
 		return async function () {
-			if (!downloaded.includes(version)) {
-				downloading = { status: true, statusText: 'Downloading zip...', version };
+			if (!downloaded.includes(bible.id)) {
+				downloading = { status: true, statusText: 'Downloading zip...', version: bible.version };
 				try {
 					if (downloading) {
-						let res = await invoke('download_bible', { url });
+						let res = await invoke('download_bible', { url: bible.url });
 						downloading = { ...downloading, statusText: `Extracting ${res}` };
 						res = await invoke('extract_bible_zip', { fileName: res });
 						extractedDir = res as string;
@@ -44,6 +50,7 @@
 						});
 						downloading = { ...downloading, statusText: 'Cleaning things up' };
 						res = await invoke('cleanup_temp');
+						alerts.add({ message: `Success: ${bible.version} Downloaded`, kind: 'success' });
 						get_donwloaded_bibles();
 						downloading = undefined;
 					}
@@ -51,22 +58,20 @@
 					if (downloading) {
 						downloading = { ...downloading, status: false };
 					}
-          downloading = undefined;
-					console.log(err);
+					downloading = undefined;
+					alerts.add({ message: (err as any).message ?? '', kind: 'error' });
 				}
 			}
+			dispatch('select', bible);
 		};
 	}
 </script>
 
 <div>
-	<Button color="alternative" size="xs">{active}</Button>
+	<Button color="alternative" size="xs">{activeBibleVersion}</Button>
 	<Dropdown transition={slide}>
 		{#each BIBLE_VERSIONS as version}
-			<DropdownItem
-				on:click={handleSetBible({ version: version.id, url: version.url })}
-				class="flex items-center gap-3"
-			>
+			<DropdownItem on:click={handleSetBible(version)} class="flex items-center gap-3">
 				{version.version}
 				{#if !downloaded.includes(version.id)}
 					{#if downloading}

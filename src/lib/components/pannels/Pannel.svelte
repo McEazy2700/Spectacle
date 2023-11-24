@@ -8,7 +8,7 @@
 
 <div
 	transition:fade
-	class={twMerge('border-black/10 dark:border-white/10 h-full border rounded-xl w-full', klass)}
+	class={twMerge('border-black/10 dark:border-white/10 border rounded-xl w-full', klass)}
 >
 	<slot />
 </div>

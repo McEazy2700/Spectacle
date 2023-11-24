@@ -2,5 +2,6 @@
 
 pub mod prelude;
 
+pub mod bible;
 pub mod template;
 pub mod video_thumbnail;

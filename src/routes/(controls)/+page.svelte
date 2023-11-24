@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { OpenPannels, Sidebar, Toolbar } from '$lib/components';
+	import { AlertBox, OpenPannels, Sidebar, Toolbar } from '$lib/components';
 </script>
 
 <div class="h-screen max-h-screen overflow-hidden overflow-y-auto">
@@ -8,4 +8,5 @@
 		<OpenPannels />
 	</div>
   <Sidebar />
+  <AlertBox />
 </div>

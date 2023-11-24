@@ -9,15 +9,16 @@ use app::commands::media::scan_media_dir;
 use app::commands::scripture::download::{
     cleanup_temp, create_bible_db, download_bible, extract_bible_zip, parse_bible_sql,
 };
-use app::commands::scripture::{download_kjv_bible, get_downloaded_bible_versions};
+use app::commands::scripture::get_downloaded_bible_versions;
+use app::commands::scripture::select::get_scriptures;
 use app::commands::template::{get_templates, save_template};
 use app::commands::view::{get_live_view, set_live_view};
 use app::state::{BibleDB, Live};
 use app::{config::db, state::DB};
 use migration::{Migrator, MigratorTrait};
 use std::{collections::HashMap, thread};
-use tokio::sync::Mutex;
 use tauri::async_runtime::block_on;
+use tokio::sync::Mutex;
 
 fn main() {
     let db_conn = match block_on(db::get_db_connection()) {
@@ -50,13 +51,13 @@ fn main() {
             get_templates,
             set_live_view,
             get_live_view,
-            download_kjv_bible,
             get_downloaded_bible_versions,
             download_bible,
             extract_bible_zip,
             parse_bible_sql,
             create_bible_db,
-            cleanup_temp
+            cleanup_temp,
+            get_scriptures
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

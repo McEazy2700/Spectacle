@@ -5,8 +5,7 @@ pub struct ScriptureOptions {
     pub version: String,
     pub book: String,
     pub chapter: i32,
-    pub start_verse: i32,
-    pub limit: i32
+    pub limit: Option<u64>
 }
 
 #[derive(Serialize, Deserialize, Debug)]

@@ -109,20 +109,18 @@ pub fn parse_bible_sql(folder_name: String) -> Result<String, AppError> {
                     .trim()
                     .split_once("VALUES")
                     .unwrap_or(("", ""))
-                    .1;
-                writeln!(output_file, "{}", format!("   {}", values.replace(";", ",")))?;
+                    .1
+                    .replace(";", "");
+                writeln!(output_file, "{}", format!("   {}", values))?;
                 first_insert = false
             } else {
                 let values = original_line
                     .trim()
                     .split_once("VALUES")
                     .unwrap_or(("", ""))
-                    .1;
-                if !values.contains("RV22_21") {
-                    writeln!(output_file, "{}", format!("   {}", values.replace(";", ",")))?;
-                } else {
-                    writeln!(output_file, "{}", format!("   {}", values))?;
-                }
+                    .1
+                    .replace(";", "");
+                writeln!(output_file, "{}", format!("   ,{}", values))?;
             }
         } else if original_line.trim().starts_with("ALTER") {
             continue;
@@ -135,6 +133,7 @@ pub fn parse_bible_sql(folder_name: String) -> Result<String, AppError> {
             writeln!(output_file, "{}", modified)?;
         }
     }
+    writeln!(output_file, "{}", ";")?;
     writeln!(output_file, "{}", "COMMIT;")?;
 
     // Rewrite file without the first line
