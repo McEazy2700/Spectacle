@@ -13,6 +13,7 @@
 </script>
 
 <button
+  type="button"
 	{title}
 	transition:fly
 	on:click={handleClick}

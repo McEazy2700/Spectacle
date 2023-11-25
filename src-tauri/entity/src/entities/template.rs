@@ -9,13 +9,21 @@ pub struct Model {
     #[sea_orm(primary_key)]
     pub id: i32,
     pub name: String,
-    pub font: Option<String>,
-    pub font_size: Option<i32>,
-    pub font_weight: Option<String>,
-    pub vertical_alignment: Option<String>,
-    pub horizontal_alignment: Option<String>,
-    pub background_url: Option<String>,
-    pub background_type: Option<String>,
+    pub font_size: i32,
+    pub font_style: String,
+    pub font_color: Option<String>,
+    pub background: Option<String>,
+    pub font_weight: i32,
+    pub text_alignment: String,
+    pub vertical_alignment: String,
+    pub horizontal_alignment: String,
+    pub side_text_font_size: i32,
+    pub side_text_font_style: String,
+    pub side_text_font_color: Option<String>,
+    pub side_text_font_weight: i32,
+    pub side_text_text_alignment: String,
+    pub side_text_vertical_alignment: String,
+    pub side_text_horizontal_alignment: String,
 }
 
 #[derive(Copy, Clone, Debug, EnumIter, DeriveRelation)]

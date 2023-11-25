@@ -1,20 +1,41 @@
-export type FontWeight = "light" | "normal" | "semibold" | "bold" | "extrabold"
-export type Alignment = "start" | "center" | "end"
+import type { FontStyleType, AlignmentType } from "../types";
 
-export type Background = {
-  type: "video" | "image",
-  url: string
+export interface TemplateModel {
+  id: number,
+  name: string,
+  font_size: number,
+  font_style: FontStyleType,
+  font_color?: string,
+  background?: string,
+  font_weight: number,
+  text_alignment: AlignmentType,
+  vertical_alignment: AlignmentType,
+  horizontal_alignment: AlignmentType,
+  side_text_font_size: number,
+  side_text_font_style: FontStyleType,
+  side_text_font_color?: string,
+  side_text_font_weight: number,
+  side_text_text_alignment: AlignmentType,
+  side_text_vertical_alignment: AlignmentType,
+  side_text_horizontal_alignment: AlignmentType,
 }
 
-export interface TemptlateModel {
-  font?: string
-  fontSize: number
-  fontWeight: FontWeight
-  verticalAlignment: Alignment
-  horizontalAlignment: Alignment
-  background: Background
-}
-
-export interface MediaTemplateModel {
-  objectFit: "cover" | "contain" | "fill"
+export interface TemplateOptions {
+  id?: number,
+  name?: string,
+  font_size?: number,
+  font_style?: string,
+  font_color?: string,
+  background?: string,
+  font_weight?: number,
+  text_alignment?: string,
+  vertical_alignment?: string,
+  horizontal_alignment?: string,
+  side_text_font_size?: number,
+  side_text_font_style?: string,
+  side_text_font_color?: string,
+  side_text_font_weight?: number,
+  side_text_text_alignment?: string,
+  side_text_vertical_alignment?: string,
+  side_text_horizontal_alignment?: string,
 }

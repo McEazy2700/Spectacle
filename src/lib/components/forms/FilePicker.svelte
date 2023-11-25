@@ -11,6 +11,7 @@
 	} from '../elements';
 	import { createEventDispatcher } from 'svelte';
 	import { ArrowLeftSolid } from 'flowbite-svelte-icons';
+	import { fade } from 'svelte/transition';
 
 	export let fileType: 'Image' | 'Audio' | 'Video';
 	export let size: 'normal' | 'small' = 'normal';
@@ -80,6 +81,7 @@
 </script>
 
 <div
+  transition:fade
 	role="dialog"
 	class="relative border border-gray-400/10 w-full h-full min-h-[40vh] overflow-auto rounded-lg ml-0.5 p-1 z-0"
 >

@@ -1,28 +1,10 @@
 use serde::{Deserialize, Serialize};
 
-use super::template::{MediaTemplateModel, TemplateModel};
-
-#[derive(Serialize, Deserialize, Debug, Clone)]
-pub enum MediaType {
-    Video,
-    Image,
-}
-
-impl ToString for MediaType {
-    fn to_string(&self) -> String {
-        match self {
-            MediaType::Video => String::from("video"),
-            MediaType::Image => String::from("image"),
-        }
-    }
-}
-
 #[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct MediaSlide {
     id: i32,
-    r#type: MediaType,
     src: String,
-    template: MediaTemplateModel,
+    template_id: u32,
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
@@ -31,7 +13,7 @@ pub struct ScriptureSlide {
     r#type: String,
     text: String,
     passage: String,
-    template: TemplateModel,
+    template_id: u32,
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
@@ -48,7 +30,7 @@ pub struct SermonSlide {
     r#type: String,
     text: String,
     alert: Option<Alert>,
-    template: TemplateModel,
+    template_id: u32,
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
@@ -57,7 +39,7 @@ pub struct SongSlide {
     r#type: String,
     text: String,
     verse: i32,
-    template: TemplateModel,
+    template_id: u32,
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
@@ -65,7 +47,7 @@ pub struct TextSlide {
     id: i32,
     r#type: String,
     text: String,
-    template: TemplateModel,
+    template_id: u32,
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone)]

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Pannel, SermonViewPannel, TemplatePannel } from '$lib/components/pannels';
+	import { Pannel, SermonViewPannel } from '$lib/components/pannels';
 	import activePannel from '$lib/stores/pannels/activePannel';
 	import { Slide } from '../slides';
 </script>
@@ -8,7 +8,6 @@
 	{#if $activePannel}
 		<div class="p-1 flex-1">
 			<SermonViewPannel />
-			<TemplatePannel />
 		</div>
 	{:else}
 		<Slide size="lg" />

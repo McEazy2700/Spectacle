@@ -1,7 +1,4 @@
-use sea_orm_migration::{
-    prelude::*,
-    sea_orm::{EnumIter, Iterable},
-};
+use sea_orm_migration::prelude::*;
 
 #[derive(DeriveMigrationName)]
 pub struct Migration;
@@ -16,29 +13,57 @@ impl MigrationTrait for Migration {
                     .col(
                         ColumnDef::new(Template::Id)
                             .integer()
-                            .not_null()
                             .primary_key()
+                            .not_null()
                             .auto_increment(),
                     )
                     .col(ColumnDef::new(Template::Name).string().not_null())
-                    .col(ColumnDef::new(Template::Font).string())
-                    .col(ColumnDef::new(Template::FontSize).integer())
-                    .col(
-                        ColumnDef::new(Template::FontWeight)
-                            .enumeration(FontWeight::Table, FontWeight::iter().skip(1)),
-                    )
+                    .col(ColumnDef::new(Template::FontSize).integer().not_null())
+                    .col(ColumnDef::new(Template::FontStyle).string().not_null())
+                    .col(ColumnDef::new(Template::FontColor).string())
+                    .col(ColumnDef::new(Template::Background).string())
+                    .col(ColumnDef::new(Template::FontWeight).integer().not_null())
+                    .col(ColumnDef::new(Template::TextAlignment).string().not_null())
                     .col(
                         ColumnDef::new(Template::VerticalAlignment)
-                            .enumeration(Alignment::Table, Alignment::iter().skip(1)),
+                            .string()
+                            .not_null(),
                     )
                     .col(
                         ColumnDef::new(Template::HorizontalAlignment)
-                            .enumeration(Alignment::Table, Alignment::iter().skip(1)),
+                            .string()
+                            .not_null(),
                     )
-                    .col(ColumnDef::new(Template::BackgroundURL).string())
                     .col(
-                        ColumnDef::new(Template::BackgroundType)
-                            .enumeration(BackgroundType::Table, BackgroundType::iter().skip(1)),
+                        ColumnDef::new(Template::SideTextFontSize)
+                            .integer()
+                            .not_null(),
+                    )
+                    .col(
+                        ColumnDef::new(Template::SideTextFontStyle)
+                            .string()
+                            .not_null(),
+                    )
+                    .col(ColumnDef::new(Template::SideTextFontColor).string())
+                    .col(
+                        ColumnDef::new(Template::SideTextFontWeight)
+                            .integer()
+                            .not_null(),
+                    )
+                    .col(
+                        ColumnDef::new(Template::SideTextTextAlignment)
+                            .string()
+                            .not_null(),
+                    )
+                    .col(
+                        ColumnDef::new(Template::SideTextVerticalAlignment)
+                            .string()
+                            .not_null(),
+                    )
+                    .col(
+                        ColumnDef::new(Template::SideTextHorizontalAlignment)
+                            .string()
+                            .not_null(),
                     )
                     .to_owned(),
             )
@@ -52,42 +77,25 @@ impl MigrationTrait for Migration {
     }
 }
 
-#[derive(Iden, EnumIter)]
-enum Alignment {
-    Table,
-    Start,
-    Center,
-    End,
-}
-
-#[derive(Iden, EnumIter)]
-enum FontWeight {
-    Table,
-    Light,
-    Normal,
-    SemiBold,
-    Bold,
-    ExtraBold,
-}
-
-#[derive(Iden, EnumIter)]
-enum BackgroundType {
-    Table,
-    Image,
-    Video,
-}
-
 /// Learn more at https://docs.rs/sea-query#iden
 #[derive(Iden)]
 enum Template {
     Table,
     Id,
     Name,
-    Font,
     FontSize,
+    FontStyle,
+    FontColor,
+    Background,
     FontWeight,
+    TextAlignment,
     VerticalAlignment,
     HorizontalAlignment,
-    BackgroundURL,
-    BackgroundType,
+    SideTextFontSize,
+    SideTextFontStyle,
+    SideTextFontColor,
+    SideTextFontWeight,
+    SideTextTextAlignment,
+    SideTextVerticalAlignment,
+    SideTextHorizontalAlignment,
 }
