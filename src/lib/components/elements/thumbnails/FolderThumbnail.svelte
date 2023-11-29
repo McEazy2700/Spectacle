@@ -13,7 +13,7 @@
 	}
 </script>
 
-<ThumbnailButton on:click={handleSelect} name={folderName}>
+<ThumbnailButton dbClick on:click={handleSelect} name={folderName}>
 	<div class="flex items-center justify-center w-full h-full p-3">
 		<FolderSolid class="w-24 h-24" />
 	</div>

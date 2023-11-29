@@ -6,16 +6,25 @@
 	const dispatch = createEventDispatcher<{ click: MouseEvent }>();
 	export let name: string | undefined = undefined;
 	export let title: string | undefined = undefined;
+	export let dbClick = false;
 
 	function handleClick(e: MouseEvent) {
-		dispatch('click', e);
+		if (!dbClick) {
+			dispatch('click', e);
+		}
+	}
+	function handleDBClick(e: MouseEvent) {
+		if (dbClick) {
+			dispatch('click', e);
+		}
 	}
 </script>
 
 <button
-  type="button"
+	type="button"
 	{title}
 	transition:fly
+	on:dblclick={handleDBClick}
 	on:click={handleClick}
 	class={`
     p-0.5 border rounded-md hover:bg-gray-400/50 transition-all gap-1

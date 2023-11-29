@@ -1,55 +1,59 @@
-import type { TemptlateModel as TemplateModel, MediaTemplateModel } from "./template"
+export type TemplateView = "Song" | "Text" | "Media" | "Sermon" | "Scripture";
 
 export interface MediaSlide {
-  id: number
-  type: "Video" | "Image"
-  src: string
-  template: MediaTemplateModel
+  Media: {
+    id: string
+    type: "Video" | "Image"
+    src: string
+    template_id: number
+  }
 }
 
 export interface ScriptureSlide {
-  id: number
-  type: "Scripture"
-  text: string
-  passage: string
-  template: TemplateModel
+  Scripture: {
+    id: string
+    type: "Scripture"
+    text: string
+    passage: string
+    template_id: number
+  }
 }
 
 export interface SermonSlide {
-  id: number
-  type: "Sermon"
-  text: string
-  alert?: {
-    show: boolean
-    title: string
-    content: string
+  Sermon: {
+    id: string
+    type: "Sermon"
+    text: string
+    template_id: number
   }
-  template: TemplateModel
 }
 
 export interface SongSlide {
-  id: number
-  type: "Song"
-  text: string
-  verse: number
-  template: TemplateModel
+  Song: {
+    id: string
+    type: "Song"
+    text: string
+    verse: number
+    template_id: number
+  }
 }
 
 export interface TextSlide {
-  id: number
-  type: "Text"
-  text: string
-  template: TemplateModel
+  Text: {
+    id: string
+    type: "Text"
+    text: string
+    template_id: number
+  }
 }
 
 export type SlideType = MediaSlide | SermonSlide | ScriptureSlide | SongSlide | TextSlide
 
 export interface View {
-  id: number
+  id: String
   name: string
-  next?: number
-  prev?: number
-  slides: SlideType[]
+  type: TemplateView
+  slide: SlideType
 }
 
 export type ScheduleType = View[]

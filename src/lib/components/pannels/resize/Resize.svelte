@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { fade } from "svelte/transition";
+
 	export let direction: 'vertical' | 'horizontal';
 	export let itemId: string;
 
@@ -28,6 +30,7 @@
 </script>
 
 <div
+  transition:fade
 	role="button"
 	tabindex="0"
 	on:mousedown={handleResize}

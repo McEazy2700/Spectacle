@@ -62,6 +62,7 @@
 					alerts.add({ message: (err as any).message ?? '', kind: 'error' });
 				}
 			}
+      document.body.click();
 			dispatch('select', bible);
 		};
 	}

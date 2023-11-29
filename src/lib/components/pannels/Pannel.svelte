@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { onDestroy, onMount } from 'svelte';
+	import { createEventDispatcher, onDestroy, onMount } from 'svelte';
 	import { fade } from 'svelte/transition';
 	import { twMerge } from 'tailwind-merge';
 
@@ -10,20 +10,32 @@
 
 	let pannelElement: HTMLElement;
 
+	const dispatch = createEventDispatcher<{ resize: HTMLElement }>();
+
 	function handleVideo() {
-		pannelElement.style.width = `${((pannelElement.clientHeight * 16) / 9).toFixed(1)}px`;
+    if (video) {
+      pannelElement.style.width = `${((pannelElement.clientHeight * 16) / 9).toFixed(1)}px`;
+    }
 	}
-	let observer = new MutationObserver(handleVideo);
+
+  function handleResize() {
+    handleVideo();
+    dispatch("resize", pannelElement);
+  }
+	let mutationObserver = new MutationObserver(handleVideo);
+  let resizeObserver = new ResizeObserver(handleResize);
 
 	onMount(() => {
 		if (video) {
 			handleVideo();
-			observer.observe(document.body, { childList: true, subtree: true });
+			mutationObserver.observe(document.body, { childList: true, subtree: true });
+      resizeObserver.observe(pannelElement);
 		}
 	});
 
 	onDestroy(() => {
-		if (video) observer.disconnect();
+		if (video) mutationObserver.disconnect();
+    resizeObserver.disconnect()
 	});
 </script>
 
@@ -32,8 +44,7 @@
 	transition:fade
 	bind:this={pannelElement}
 	class={twMerge(
-		`border-black/10 max-w-full max-h-full inline-block dark:border-white/10 border rounded-xl w-full
-      overflow-hidden`,
+		`border-black/10 inline-block dark:border-white/10 border rounded-xl overflow-hidden`,
 		klass
 	)}
 >

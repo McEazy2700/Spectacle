@@ -2,18 +2,19 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct MediaSlide {
-    id: i32,
+    id: String,
+    r#type: String,
     src: String,
-    template_id: u32,
+    template_id: i32,
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct ScriptureSlide {
-    id: i32,
+    id: String,
     r#type: String,
     text: String,
     passage: String,
-    template_id: u32,
+    template_id: i32,
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
@@ -26,28 +27,27 @@ pub struct Alert {
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct SermonSlide {
-    id: i32,
+    id: String,
     r#type: String,
     text: String,
-    alert: Option<Alert>,
-    template_id: u32,
+    template_id: i32,
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct SongSlide {
-    id: i32,
+    id: String,
     r#type: String,
     text: String,
     verse: i32,
-    template_id: u32,
+    template_id: i32,
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct TextSlide {
-    id: i32,
+    id: String,
     r#type: String,
     text: String,
-    template_id: u32,
+    template_id: i32,
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
@@ -61,11 +61,10 @@ pub enum SlideType {
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct View {
-    id: i32,
+    id: String,
     name: String,
-    next: Option<i32>,
-    prev: Option<i32>,
-    slides: Vec<SlideType>,
+    r#type: String,
+    slide: SlideType,
 }
 
 pub type ScheduleType = Vec<View>;

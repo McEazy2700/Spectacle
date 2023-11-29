@@ -18,7 +18,9 @@
 			</div>
 		{/if}
 	</div>
-	<Resize itemId="work-pannels" direction="vertical" />
+  {#if $openPannels.length > 0}
+    <Resize itemId="work-pannels" direction="vertical" />
+  {/if}
 	{#if $openPannels.includes('Explorer')}
 		<Explorer />
 	{/if}

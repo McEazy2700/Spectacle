@@ -38,5 +38,5 @@
 		class={`${$presenting ? 'animate-pulse text-red-500' : ''}`}
 		icon="fluent:record-24-regular"
 	/>
-	<Span class="text-[10px]">{$presenting ? 'Live' : 'Go Live'}</Span>
+	<Span class="text-[10px] text-white">{$presenting ? 'Live' : 'Go Live'}</Span>
 </Button>

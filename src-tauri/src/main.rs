@@ -11,7 +11,9 @@ use app::commands::scripture::download::{
 };
 use app::commands::scripture::get_downloaded_bible_versions;
 use app::commands::scripture::select::get_scriptures;
-use app::commands::template::{get_templates, save_template};
+use app::commands::template::{
+    get_default_template, get_template, get_templates, save_template, set_default_template,
+};
 use app::commands::view::{get_live_view, set_live_view};
 use app::state::{BibleDB, Live};
 use app::{config::db, state::DB};
@@ -46,18 +48,21 @@ fn main() {
             view: std::sync::Mutex::new(None),
         })
         .invoke_handler(tauri::generate_handler![
-            scan_media_dir,
+            cleanup_temp,
+            get_template,
             save_template,
             get_templates,
             set_live_view,
             get_live_view,
-            get_downloaded_bible_versions,
+            scan_media_dir,
             download_bible,
-            extract_bible_zip,
+            get_scriptures,
             parse_bible_sql,
             create_bible_db,
-            cleanup_temp,
-            get_scriptures
+            extract_bible_zip,
+            get_default_template,
+            set_default_template,
+            get_downloaded_bible_versions,
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

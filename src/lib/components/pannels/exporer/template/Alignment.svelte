@@ -21,16 +21,18 @@
 		'inherit'
 	];
 	let open = false;
+
+	function clickHandlerFactory(val: AlignmentType) {
+		return function () {
+			alignment = val;
+			open = false;
+		};
+	}
 </script>
 
 <Button color="alternative" class="rounded w-fit" size="xs">{alignment}</Button>
 <Dropdown bind:open transition={fade}>
 	{#each alignments as val}
-		<DropdownItem
-			on:click={() => {
-				alignment = val;
-				open = false;
-			}}>{val}</DropdownItem
-		>
+		<DropdownItem on:click={clickHandlerFactory(val)}>{val}</DropdownItem>
 	{/each}
 </Dropdown>

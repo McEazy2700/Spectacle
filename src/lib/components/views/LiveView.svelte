@@ -1,14 +1,27 @@
 <script lang="ts">
-	import { listen } from '@tauri-apps/api/event';
-  import { Slide } from "$lib/components/slides"
-	import type { SlideType } from '$lib/models/slide';
+	import { Slide } from '$lib/components/slides';
+	import type { View } from '$lib/models/slide';
+	import { onDestroy, onMount } from 'svelte';
+	import { invoke } from '@tauri-apps/api';
+	import { listen, type UnlistenFn } from '@tauri-apps/api/event';
 
-  let liveSlide: SlideType | undefined = undefined
+	let view: View | undefined = undefined;
+	export let size: 'xs' | 'sm' | 'md' | 'lg' | 'full' = 'full';
+	export let bordered = false;
+	let unlisten: Promise<UnlistenFn>;
 
-  export let size: "xs" | "sm" | "md" | "lg" | "full" = "full"
-  export let bordered = false;
-	listen('state-update', (e) => {
+	onMount(async () => {
+		let res = await invoke('get_live_view');
+		view = res as View;
+
+		unlisten = listen('state-update', (e) => {
+			view = e.payload as View;
+		});
+	});
+
+	onDestroy(() => {
+		unlisten.then((f) => f());
 	});
 </script>
 
-<Slide {bordered} {size} slide={liveSlide}/>
+<Slide templateType={view?.type} {bordered} {size} slide={view?.slide} />

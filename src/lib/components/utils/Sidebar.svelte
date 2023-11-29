@@ -17,12 +17,12 @@
 
 <div class="top-1/4 absolute group z-[1000]">
 	<div
-		class="bg-primary-600 h-8 w-2 group-hover:w-5 group-hover:h-20 transition-all rounded-r-lg"
+		class="bg-primary-600 h-16 w-2 group-hover:w-8 group-hover:h-20 transition-all rounded-r-lg"
 	/>
 	<div class="relative">
 		<div
 			class={`
-      bg-primary-600 p-1 absolute group-hover:left-0 -top-16 transition-all
+      bg-primary-700 p-1 absolute group-hover:left-0 -top-16 transition-all
       -left-56 py-2 rounded-r-xl flex flex-col gap-2
     `}
 		>

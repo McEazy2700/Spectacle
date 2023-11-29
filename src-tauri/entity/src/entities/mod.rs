@@ -3,5 +3,6 @@
 pub mod prelude;
 
 pub mod bible;
+pub mod default_template;
 pub mod template;
 pub mod video_thumbnail;

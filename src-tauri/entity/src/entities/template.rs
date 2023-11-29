@@ -9,11 +9,16 @@ pub struct Model {
     #[sea_orm(primary_key)]
     pub id: i32,
     pub name: String,
+    pub background: Option<String>,
     pub font_size: i32,
     pub font_style: String,
     pub font_color: Option<String>,
-    pub background: Option<String>,
     pub font_weight: i32,
+    pub text_shadow: bool,
+    pub text_shadow_blur: Option<i32>,
+    pub text_shadow_color: Option<String>,
+    pub text_shadow_vertical: Option<i32>,
+    pub text_shadow_horizontal: Option<i32>,
     pub text_alignment: String,
     pub vertical_alignment: String,
     pub horizontal_alignment: String,
@@ -21,12 +26,26 @@ pub struct Model {
     pub side_text_font_style: String,
     pub side_text_font_color: Option<String>,
     pub side_text_font_weight: i32,
+    pub side_text_shadow: bool,
+    pub side_text_shadow_blur: Option<i32>,
+    pub side_text_shadow_color: Option<String>,
+    pub side_text_shadow_vertical: Option<i32>,
+    pub side_text_shadow_horizontal: Option<i32>,
     pub side_text_text_alignment: String,
     pub side_text_vertical_alignment: String,
     pub side_text_horizontal_alignment: String,
 }
 
 #[derive(Copy, Clone, Debug, EnumIter, DeriveRelation)]
-pub enum Relation {}
+pub enum Relation {
+    #[sea_orm(has_many = "super::default_template::Entity")]
+    DefaultTemplate,
+}
+
+impl Related<super::default_template::Entity> for Entity {
+    fn to() -> RelationDef {
+        Relation::DefaultTemplate.def()
+    }
+}
 
 impl ActiveModelBehavior for ActiveModel {}

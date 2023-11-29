@@ -1,4 +1,7 @@
 export { default as ScriptureExplorer } from "./ScriptureExplorer.svelte"
+export { default as BibleBooksList } from "./BibleBooksList.svelte"
+export { default as BibleBookChapters } from "./BibleBookChapters.svelte"
+export { default as BibleBookChapterVerses } from "./BibleBookChapterVerses.svelte"
 export { default as BibleVersion } from "./BibleVersion.svelte"
 export { default as ScriptureText } from "./ScriptureText.svelte"
 export { default as BibleSearch } from "./BibleSearch.svelte"
