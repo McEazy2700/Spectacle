@@ -9,4 +9,4 @@ Well I'm your classic linux fan boy, so easyworship was already out of the pictu
 That's right, spectacle is written in rust using the [tauri](https://tauri.app/) toolkit with [svelte](https://svelte.dev/) as the UI layer. Spectacle aims to be a lightweight but performant presentation software that is packed with all the features you need.
 
 ### Note
-Spectacle is still under heavy development and is lacking many key features, as well as Windows and Mac installers. But if you're on a Linux machine and want to test it out, there are rpm and deb installers in the files directory.
+Spectacle is still under heavy development and is lacking many key features, as well as Windows and Mac installers. But if you're on a Linux machine and want to test it out, here are the [AppImage](https://drive.google.com/file/d/1LpG0Oh_Mvl2vsTgBbz2ug8maGBLm-R2l/view?usp=drive_link) and [.dev](https://drive.google.com/file/d/1PZ9s-GDCBapBdUqSP-nyHvqyQ_686ak-/view?usp=drive_link) files.
