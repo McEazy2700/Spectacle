@@ -1,7 +1,10 @@
 <script lang="ts">
-	import Icon from '@iconify/svelte';
-	import ToolbarButton from './ToolbarButton.svelte';
+  import AlignLeft from "~icons/prime/align-left";
+  import AlignRight from "~icons/prime/align-right"
+  import AlignCenter from "~icons/prime/align-center"
+  import AlignJustify from "~icons/prime/align-justify"
 	import type { Editor } from '@tiptap/core';
+	import { ToolbarButton } from "../../buttons";
 	export let editor: Editor;
 </script>
 
@@ -13,7 +16,7 @@
 		on:click={() => editor.chain().focus().setTextAlign('left').run()}
 		class="rounded-r-none border-r-0"
 	>
-		<Icon class="text-lg" icon="prime:align-left" />
+    <AlignLeft font-size={15}/>
 	</ToolbarButton>
 	<ToolbarButton
 		title="Center"
@@ -22,7 +25,7 @@
 		on:click={() => editor.chain().focus().setTextAlign('center').run()}
 		class="rounded-none border-r-0"
 	>
-		<Icon class="text-lg" icon="prime:align-center" />
+    <AlignCenter font-size={15}/>
 	</ToolbarButton>
 	<ToolbarButton
 		title="Right"
@@ -31,7 +34,7 @@
 		on:click={() => editor.chain().focus().setTextAlign('right').run()}
 		class="rounded-none border-r-0"
 	>
-		<Icon class="text-lg" icon="prime:align-right" />
+    <AlignRight font-size={15}/>
 	</ToolbarButton>
 	<ToolbarButton
 		title="Justify"
@@ -40,6 +43,6 @@
 		on:click={() => editor.chain().focus().setTextAlign('justify')}
 		class="rounded-l-none"
 	>
-		<Icon class="text-lg" icon="prime:align-justify" />
+    <AlignJustify font-size={15}/>
 	</ToolbarButton>
 </div>

@@ -15,6 +15,7 @@
 	let downloaded: string[] = [];
 	let downloading: DownloadingItem | undefined;
 	let extractedDir: string | undefined = undefined;
+	let open = false;
 
 	$: activeBible = BIBLE_VERSIONS.filter((b) => b.version == activeBibleVersion)[0];
 
@@ -62,25 +63,28 @@
 					alerts.add({ message: (err as any).message ?? '', kind: 'error' });
 				}
 			}
-      document.body.click();
 			dispatch('select', bible);
+			open = false;
 		};
 	}
 </script>
 
 <div>
 	<Button color="alternative" size="xs">{activeBibleVersion}</Button>
-	<Dropdown transition={slide}>
+	<Dropdown bind:open transition={slide}>
 		{#each BIBLE_VERSIONS as version}
-			<DropdownItem on:click={handleSetBible(version)} class="flex items-center gap-3">
-				{version.version}
-				{#if !downloaded.includes(version.id)}
-					{#if downloading}
-						<Spinner />
-					{:else}
+			<DropdownItem
+				on:click={handleSetBible(version)}
+				class="flex items-center gap-3 justify-between w-full"
+			>
+				<div>
+					{version.version}
+				</div>
+				<div>
+					{#if !downloaded.includes(version.id)}
 						<DownloadSolid />
 					{/if}
-				{/if}
+				</div>
 			</DropdownItem>
 		{/each}
 	</Dropdown>

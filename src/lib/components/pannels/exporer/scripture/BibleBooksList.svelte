@@ -1,11 +1,11 @@
 <script>
 	import { Button, Label } from 'flowbite-svelte';
 	import { BIBLE_BOOKS } from '$lib/constants/bible';
-	import activeScripture from '$lib/stores/activeScripture';
+	import activeScripture from '$lib/stores/active/scripture';
 </script>
 
 <div class="flex flex-col items-center rounded-lg overflow-hidden">
-	<Label class="font-semibold p-1 px-2 bg-white/20 w-full">Book</Label>
+	<Label class="font-semibold p-1 px-2 bg-black/10 dark:bg-white/20 w-full">Book</Label>
 	<ul
 		class={`
             max-w-fit p-1 border border-black/10 dark:border-white/10 rounded-b-lg

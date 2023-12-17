@@ -1,4 +1,7 @@
-use std::{sync::{Arc, self}, collections::HashMap};
+use std::{
+    collections::HashMap,
+    sync::{self, Arc},
+};
 use tokio::sync::Mutex;
 
 use sea_orm::DbConn;
@@ -10,9 +13,37 @@ pub struct DB {
 }
 
 pub struct BibleDB {
-    pub conns: Mutex<HashMap<String, Arc<Mutex<DbConn>>>>
+    pub conns: Mutex<HashMap<String, Arc<Mutex<DbConn>>>>,
+}
+
+impl BibleDB {
+    pub fn new() -> Self {
+        Self {
+            conns: Mutex::new(HashMap::new()),
+        }
+    }
 }
 
 pub struct Live {
-    pub view: sync::Mutex<Option<View>>
+    pub view: sync::Mutex<Option<View>>,
+}
+
+impl Live {
+    pub fn new() -> Self {
+        Self {
+            view: sync::Mutex::new(None),
+        }
+    }
+}
+
+pub struct SongDB {
+    pub conns: Mutex<HashMap<String, Arc<Mutex<DbConn>>>>,
+}
+
+impl SongDB {
+    pub fn new() -> Self {
+        Self {
+            conns: Mutex::new(HashMap::new()),
+        }
+    }
 }

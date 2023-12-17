@@ -2,16 +2,19 @@
 	import { imageExtensions } from '$lib/constants/extensions';
 	import { twMerge } from 'tailwind-merge';
 	import { ImageBackground, VideoBackground } from '.';
+	import { fade } from 'svelte/transition';
 
 	let klass = '';
 	export let src: string | undefined = undefined;
 	export let bordered = false;
+	export let preview = false;
 	export { klass as class };
 
 	$: isImage = imageExtensions.includes(src?.split('.').pop() ?? '__');
 </script>
 
 <div
+	transition:fade
 	class={twMerge(
 		`z-0 relative overflow-hidden ${bordered ? 'border border-black/10 dark:border-white/20' : ''}`,
 		klass
@@ -22,7 +25,7 @@
 			{#if isImage}
 				<ImageBackground {src} />
 			{:else}
-				<VideoBackground {src} />
+				<VideoBackground {preview} {src} />
 			{/if}
 		</div>
 	{/if}

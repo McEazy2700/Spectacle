@@ -1,4 +1,5 @@
-pub mod view;
 pub mod media;
-pub mod template;
 pub mod scripture;
+pub mod songs;
+pub mod template;
+pub mod view;

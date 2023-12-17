@@ -4,4 +4,4 @@
 	export let src: string;
 </script>
 
-<img class="w-full aspect-video object-cover" src={convertFileSrc(src)} alt="background" />
+<img class="min-w-full min-h-full aspect-video object-cover" src={convertFileSrc(src)} alt="background" />

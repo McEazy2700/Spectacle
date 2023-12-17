@@ -1,22 +1,27 @@
-import { writable } from "svelte/store"
-import type { Pannel } from "$lib/models/pannels"
+import { writable } from "svelte/store";
+import type { Pannel } from "$lib/models/pannels";
 
-const { update, set, subscribe } = writable<Pannel[]>([])
+const { update, set, subscribe } = writable<Pannel[]>([
+  "Preview",
+  "Schedule",
+  "LiveView",
+  "Explorer",
+]);
 
 function remove(pannel: Pannel) {
   update((curr) => {
-    const updated = curr.filter(item => item !== pannel)
-    return updated
-  })
+    const updated = curr.filter((item) => item !== pannel);
+    return updated;
+  });
 }
 
 function add(pannel: Pannel) {
   update((curr) => {
     if (!curr.includes(pannel)) {
-      return [...curr, pannel]
+      return [...curr, pannel];
     }
-    return curr
-  })
+    return curr;
+  });
 }
 
 export default {
@@ -24,5 +29,5 @@ export default {
   subscribe,
   update,
   remove,
-  add
-}
+  add,
+};

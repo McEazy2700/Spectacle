@@ -1,12 +1,11 @@
+use crate::{app::utils::dirs::get_bible_dir, common::errors::AppError};
 use std::fs;
 
-use crate::{app::utils::dirs::get_bible_dir, common::errors::AppError};
-
 pub mod download;
-pub mod select;
+pub mod queries;
 
 #[tauri::command]
-pub fn get_downloaded_bible_versions() -> anyhow::Result<Vec<String>, AppError> {
+pub fn get_downloaded_bible_versions() -> Result<Vec<String>, AppError> {
     let bible_dir = get_bible_dir()?;
     let mut bible_versions: Vec<String> = Vec::new();
     let entries = fs::read_dir(&bible_dir)?;

@@ -6,3 +6,13 @@ pub mod bible;
 pub mod default_template;
 pub mod template;
 pub mod video_thumbnail;
+
+// OpenLp Songs
+pub mod authors;
+pub mod authors_songs;
+pub mod media_files;
+pub mod metadata;
+pub mod song_books;
+pub mod songs;
+pub mod songs_topics;
+pub mod topics;

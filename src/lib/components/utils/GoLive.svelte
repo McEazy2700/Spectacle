@@ -1,9 +1,10 @@
 <script lang="ts">
 	import { WebviewWindow } from '@tauri-apps/api/window';
 	import { emit } from '@tauri-apps/api/event';
-	import Icon from '@iconify/svelte';
 	import { Button, Span } from 'flowbite-svelte';
 	import presenting from '$lib/stores/presenting';
+	import VideoIcon from '~icons/eva/video-fill';
+	import CloseIcon from '~icons/ep/close-bold';
 
 	let presentationWindow: WebviewWindow;
 
@@ -29,14 +30,22 @@
 </script>
 
 <Button
+	title={$presenting ? 'Stop presenting' : 'Go Live'}
 	on:click={handlePresent}
-	color={$presenting ? 'green' : 'primary'}
+	color={$presenting ? 'red' : 'green'}
 	size="xs"
-	class="flex flex-col items-center"
+	class="flex flex-col items-center rounded-md p-1 gap-1"
 >
-	<Icon
-		class={`${$presenting ? 'animate-pulse text-red-500' : ''}`}
-		icon="fluent:record-24-regular"
-	/>
-	<Span class="text-[10px] text-white">{$presenting ? 'Live' : 'Go Live'}</Span>
+	{#if $presenting}
+		<CloseIcon font-size={12} />
+	{:else}
+		<VideoIcon font-size={12} />
+	{/if}
+	<span class="text-xs bg-black/20 rounded-sm px-2">
+		{#if $presenting}
+			Close
+		{:else}
+			Go Live
+		{/if}
+	</span>
 </Button>

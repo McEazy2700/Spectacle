@@ -1,22 +1,25 @@
 <script lang="ts">
-	import { Pannel, SermonViewPannel } from '$lib/components/pannels';
-	import activePannel from '$lib/stores/pannels/activePannel';
-	import { Slide } from '../slides';
+	import { Pannel } from '$lib/components/pannels';
+	import activePreview from '$lib/stores/active/preview';
+	import { Slide, SpectacleSlide } from '../slides';
+	import { ActiveSong } from './active';
 
 	let scale: number = 1;
+	let width: number;
+	let height: number;
 	function rescale(e: CustomEvent<HTMLElement>) {
+		height = e.detail.clientHeight;
+		width = e.detail.clientWidth;
 		scale = e.detail.clientWidth / 1265;
 	}
 </script>
 
-<Pannel on:resize={rescale} video class="aspect-video h-full relative">
-	<div class="absolute w-full h-full top-0 left-0">
-		{#if $activePannel}
-			<div class="p-1 flex-1">
-				<SermonViewPannel />
-			</div>
-		{:else}
-			<Slide bind:scale size="lg" />
-		{/if}
-	</div>
+<Pannel on:resize={rescale} resizeable video class="h-full overflow-y-auto p-0.5 pr-1">
+	{#if $activePreview === 'Song'}
+		<ActiveSong containerHeight={height} containerWidth={width} {scale} />
+	{:else}
+		<Slide scale={scale - 0.03} scalable size="lg" maxWidth={width}>
+			<SpectacleSlide />
+		</Slide>
+	{/if}
 </Pannel>

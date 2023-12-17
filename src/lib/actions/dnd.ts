@@ -4,7 +4,7 @@ export function draggable<T>(node: HTMLElement, data: T) {
   node.style.cursor = "grab"
 
   function handleDragStart(e: DragEvent) {
-    e.dataTransfer?.setData("text/plain", JSON.stringify(data))
+    e.dataTransfer?.setData("text/plain", JSON.stringify(state))
   }
 
   node.addEventListener("dragstart", handleDragStart)

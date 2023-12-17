@@ -14,7 +14,7 @@
 		{/if}
 		{#if $openPannels.includes('LiveView')}
 			<div class="justify-self-end w-fit">
-				<LiveView size="xs" bordered />
+				<LiveView scalable scale={0.95} size="xs" bordered />
 			</div>
 		{/if}
 	</div>

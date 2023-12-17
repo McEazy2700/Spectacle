@@ -2,10 +2,10 @@
 	import { TabItem, Tabs } from 'flowbite-svelte';
 	import { FileExplorer, Pannel, TemplateExplorer } from '..';
 	import { CaretRightSolid, GridPlusSolid, ListMusicSolid, OpenBookSolid, PenSolid } from 'flowbite-svelte-icons';
-	import { ScriptureExplorer } from '.';
+	import { ScriptureExplorer, SongsExplorer } from '.';
 </script>
 
-<Pannel id="explore-pannels" class="flex-1 overflow-auto min-h-[30%]">
+<Pannel id="explore-pannels" class="flex-1 overflow-auto min-h-[30%] h-full">
 	<Tabs style="underline">
 		<TabItem class="h-full" open>
 			<div class="flex items-center gap-2" slot="title">
@@ -33,7 +33,7 @@
 				<ListMusicSolid />
 				Song
 			</div>
-			Song
+			<SongsExplorer />
 		</TabItem>
 		<TabItem class="h-full">
 			<div class="flex items-center gap-2" slot="title">

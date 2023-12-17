@@ -2,7 +2,7 @@ use crate::{
     app::{
         config::db::get_bible_db_conn,
         state::BibleDB,
-        utils::dirs::{get_app_data_dir, get_bible_dir},
+        utils::dirs::{get_app_temp_dir, get_bible_dir},
     },
     common::errors::AppError,
 };
@@ -28,9 +28,7 @@ pub async fn download_bible(url: String) -> Result<String, AppError> {
         None => Err(AppError::new("Invalid file url")),
     }?;
 
-    let data_dir = get_app_data_dir()?;
-    let temp_dir = data_dir.join("temp");
-    fs::create_dir_all(&temp_dir)?;
+    let temp_dir = get_app_temp_dir()?;
     let file_path = temp_dir.join(&file_name);
 
     let mut file = File::create(&file_path)?;
@@ -39,13 +37,12 @@ pub async fn download_bible(url: String) -> Result<String, AppError> {
     let content = response.bytes().await?;
     file.write_all(&content)?;
 
-    Ok(file_name)
+    return Ok(file_name);
 }
 
 #[tauri::command]
 pub fn extract_bible_zip(file_name: String) -> Result<String, AppError> {
-    let data_dir = get_app_data_dir()?;
-    let temp_dir = data_dir.join("temp");
+    let temp_dir = get_app_temp_dir()?;
 
     let target_dir_name = file_name.split(".").next().unwrap_or("temp_zip");
     let target_dir = temp_dir.join(&target_dir_name);
@@ -56,13 +53,12 @@ pub fn extract_bible_zip(file_name: String) -> Result<String, AppError> {
         Ok(_) => Ok(()),
         Err(err) => Err(AppError::new(err.to_string().as_str())),
     }?;
-    Ok(target_dir_name.to_string())
+    return Ok(target_dir_name.to_string());
 }
 
 #[tauri::command]
 pub fn parse_bible_sql(folder_name: String) -> Result<String, AppError> {
-    let data_dir = get_app_data_dir()?;
-    let temp_dir = data_dir.join("temp");
+    let temp_dir = get_app_temp_dir()?;
     let bible_dir = temp_dir.join(&folder_name);
     let mut first_insert = true;
 
@@ -152,7 +148,7 @@ pub fn parse_bible_sql(folder_name: String) -> Result<String, AppError> {
         writeln!(output_file, "{}", line)?;
     }
 
-    Ok(folder_name)
+    return Ok(folder_name);
 }
 
 /// Creates a database based on the bible name and writes the current temp bible.sql in the temp directory
@@ -166,8 +162,7 @@ pub async fn create_bible_db(
     let bible_dir = get_bible_dir()?;
     let bible_db = bible_dir.join(format!("{}.db", &bible_name));
 
-    let data_dir = get_app_data_dir()?;
-    let temp_dir = data_dir.join("temp");
+    let temp_dir = get_app_temp_dir()?;
     let bible_sql_path = temp_dir.join(temp_folder_name).join("bible.sql");
 
     let bible_sql = fs::read_to_string(bible_sql_path)?;
@@ -182,13 +177,12 @@ pub async fn create_bible_db(
     ))
     .await?;
 
-    Ok(bible_name)
+    return Ok(bible_name);
 }
 
 #[tauri::command]
 pub fn cleanup_temp() -> Result<String, AppError> {
-    let data_dir = get_app_data_dir()?;
-    let temp_dir = data_dir.join("temp");
+    let temp_dir = get_app_temp_dir()?;
     fs::remove_dir_all(temp_dir)?;
-    Ok(String::from("Cleaned up temp dir"))
+    return Ok(String::from("Cleaned up temp dir"));
 }

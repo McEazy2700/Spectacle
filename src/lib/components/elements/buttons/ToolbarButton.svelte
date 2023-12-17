@@ -5,7 +5,12 @@
 	import { twMerge } from 'tailwind-merge';
 
 	let klass = '';
+  type Alignment = 'start' | 'end'
+  type Side = 'top' | 'right' | 'bottom' | 'left'
+  type AlignedPlacement = `${Side}-${Alignment}`
+  type PlaceMent = Side | AlignedPlacement
 
+  export let placement: PlaceMent | undefined = undefined
 	export { klass as class };
 	export let disabled = false;
 	export let shortCut: string | undefined = undefined;
@@ -22,7 +27,7 @@
 <div>
 	<Button
 		class={twMerge(
-			`border border-black/10 dark:border-white/10 rounded m-0 p-1 ${
+			`border border-black/10 dark:border-white/10 rounded-sm m-0 p-1 ${
 				active ? 'bg-black/10 dark:bg-white/10' : ''
 			}`,
 			klass
@@ -36,7 +41,7 @@
 		<slot />
 	</Button>
 	{#if shortCut || title}
-		<Popover class="flex text-xs items-center gap-2" transition={fade}>
+		<Popover {placement} class="flex z-[100000] text-xs items-center gap-2" transition={fade}>
 			{title}
 			{#if shortCut}
 				<code class="text-xs bg-black/10 p-1 rounded">{shortCut}</code>

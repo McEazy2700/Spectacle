@@ -4,6 +4,7 @@
 	import { twMerge } from 'tailwind-merge';
 
 	export let video = false;
+	export let resizeable = false;
 	let klass = '';
 	export { klass as class };
 	export let id: string | undefined = undefined;
@@ -12,30 +13,19 @@
 
 	const dispatch = createEventDispatcher<{ resize: HTMLElement }>();
 
-	function handleVideo() {
-    if (video) {
-      pannelElement.style.width = `${((pannelElement.clientHeight * 16) / 9).toFixed(1)}px`;
-    }
+	function handleResize() {
+		dispatch('resize', pannelElement);
 	}
-
-  function handleResize() {
-    handleVideo();
-    dispatch("resize", pannelElement);
-  }
-	let mutationObserver = new MutationObserver(handleVideo);
-  let resizeObserver = new ResizeObserver(handleResize);
+	let resizeObserver = new ResizeObserver(handleResize);
 
 	onMount(() => {
-		if (video) {
-			handleVideo();
-			mutationObserver.observe(document.body, { childList: true, subtree: true });
-      resizeObserver.observe(pannelElement);
+		if (resizeable) {
+			resizeObserver.observe(pannelElement);
 		}
 	});
 
 	onDestroy(() => {
-		if (video) mutationObserver.disconnect();
-    resizeObserver.disconnect()
+		if (resizeable) resizeObserver.disconnect();
 	});
 </script>
 
@@ -43,6 +33,7 @@
 	{id}
 	transition:fade
 	bind:this={pannelElement}
+	style={video ? 'aspect-ratio: 16 / 9;' : ''}
 	class={twMerge(
 		`border-black/10 inline-block dark:border-white/10 border rounded-xl overflow-hidden`,
 		klass

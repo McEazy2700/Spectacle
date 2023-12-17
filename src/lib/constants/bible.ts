@@ -1,4 +1,10 @@
-export const BIBLE_BOOKS = [
+interface BibleBook {
+  name: string,
+  abrv: string,
+  chapters: number
+}
+
+export const BIBLE_BOOKS: BibleBook[] = [
   { name: "Genesis", abrv: "GEN", chapters: 50 },
   { name: "Exodus", abrv: "EXO", chapters: 40 },
   { name: "Leviticus", abrv: "LEV", chapters: 27 },

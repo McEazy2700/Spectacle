@@ -1,7 +1,7 @@
 <script>
 	import { Button, DarkMode, Toolbar } from 'flowbite-svelte';
 	import { slide } from 'svelte/transition';
-	import { GoLive } from '.';
+	import { ChangeSlide, GoLive } from '.';
 	import { AngleDownSolid, AngleUpSolid } from 'flowbite-svelte-icons';
 
 	let show = true;
@@ -14,7 +14,10 @@
 				<div>
 					<DarkMode size="sm" />
 				</div>
-				<GoLive />
+        <div class="flex items-center gap-2">
+          <ChangeSlide />
+          <GoLive />
+        </div>
 			</div>
 		</Toolbar>
 	{/if}

@@ -50,7 +50,7 @@ export interface TextSlide {
 export type SlideType = MediaSlide | SermonSlide | ScriptureSlide | SongSlide | TextSlide
 
 export interface View {
-  id: String
+  id: string
   name: string
   type: TemplateView
   slide: SlideType

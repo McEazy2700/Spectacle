@@ -1,7 +1,8 @@
 <script lang="ts">
-	import Icon from '@iconify/svelte';
+  import Undo from "~icons/iconamoon/do-undo-fill";
+  import Redo from "~icons/iconamoon/do-redo-fill";
 	import type { Editor } from '@tiptap/core';
-	import ToolbarButton from './ToolbarButton.svelte';
+	import { ToolbarButton } from "../../buttons";
 
 	export let editor: Editor;
 </script>
@@ -14,7 +15,7 @@
 		disabled={!editor.can().undo()}
 		on:click={() => editor.chain().focus().undo().run()}
 	>
-		<Icon class="text-lg" icon="iconamoon:do-undo-fill" />
+    <Undo font-size={15}/>
 	</ToolbarButton>
 	<ToolbarButton
 		class="rounded-l-none"
@@ -23,6 +24,6 @@
 		disabled={!editor.can().redo()}
 		on:click={() => editor.chain().focus().redo().run()}
 	>
-		<Icon class="text-lg" icon="iconamoon:do-redo-fill" />
+    <Redo font-size={15}/>
 	</ToolbarButton>
 </div>

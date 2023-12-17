@@ -1,8 +1,10 @@
 <script lang="ts">
 	import type { Editor } from '@tiptap/core';
-	import { Input } from 'flowbite-svelte';
-	import ToolbarButton from './ToolbarButton.svelte';
-	import Icon from '@iconify/svelte';
+  import Bold from "~icons/clarity/bold-line"
+  import Italic from "~icons/clarity/italic-line"
+  import Underline from "~icons/clarity/underline-line"
+	import { NumberInput } from '$lib/components/forms';
+	import { ToolbarButton } from '../../buttons';
 
 	export let editor: Editor;
 	let fontSize: number = parseInt(editor.getAttributes('textStyle').fontSize ?? 16);
@@ -22,13 +24,11 @@
 
 <div class="flex h-full">
 	<div class="flex">
-		<Input
-			on:keydown={(e) => console.log(e.key)}
-			bind:value={fontSize}
+		<NumberInput
+			class="rounded-r-none border-r-0"
 			size="sm"
-			class="p-[4px] w-[40px] h-full rounded rounded-r-none border-r-0"
 			placeholder="16"
-			type="number"
+			bind:value={fontSize}
 		/>
 		<input
 			bind:this={colorInput}
@@ -46,7 +46,7 @@
 		active={editor.isActive('bold')}
 		on:click={() => editor.chain().focus().toggleBold().run()}
 	>
-		<Icon class="text-lg" icon="clarity:bold-line" />
+    <Bold font-size={15}/>
 	</ToolbarButton>
 	<ToolbarButton
 		class="rounded-l-none rounded-r-none"
@@ -55,7 +55,7 @@
 		active={editor.isActive('italic')}
 		on:click={() => editor.chain().focus().toggleItalic().run()}
 	>
-		<Icon class="text-lg" icon="clarity:italic-line" />
+    <Italic font-size={15}/>
 	</ToolbarButton>
 	<ToolbarButton
 		class="border-l-0 rounded-l-none"
@@ -64,6 +64,6 @@
 		active={editor.isActive('underline')}
 		on:click={() => editor.chain().focus().toggleUnderline().run()}
 	>
-		<Icon class="text-lg" icon="clarity:underline-line" />
+    <Underline font-size={15}/>
 	</ToolbarButton>
 </div>

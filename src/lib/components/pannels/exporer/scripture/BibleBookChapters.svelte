@@ -1,5 +1,5 @@
 <script>
-	import activeScripture from '$lib/stores/activeScripture';
+	import activeScripture from '$lib/stores/active/scripture';
 	import { Button, Label } from 'flowbite-svelte';
 	import { fade } from 'svelte/transition';
 
@@ -15,7 +15,7 @@
 </script>
 
 <div class="flex flex-col items-center rounded-lg overflow-hidden">
-	<Label class="font-semibold p-1 px-2 bg-white/20 w-full">Chapter</Label>
+	<Label class="font-semibold p-1 px-2 bg-black/10 dark:bg-white/20 w-full">Chapter</Label>
 	<ul
 		transition:fade
 		class={`

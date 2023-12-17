@@ -1,5 +1,5 @@
 use entity::entities::bible;
-use sea_orm::{ColumnTrait, EntityTrait, QueryFilter};
+use sea_orm::{ColumnTrait, EntityTrait, QueryFilter, QuerySelect};
 use tauri::State;
 
 use crate::{
@@ -17,13 +17,18 @@ pub async fn get_scriptures(
     let scriputres = bible::Entity::find()
         .filter(bible::Column::Book.eq(opts.book))
         .filter(bible::Column::Chapter.eq(opts.chapter.to_string()));
+    let mut scripture_cursor = scriputres
+        .cursor_by(bible::Column::StartVerse)
+        .offset(opts.offset);
 
     if let Some(limit) = opts.limit {
-        let mut limit_scriptures = scriputres.cursor_by(bible::Column::StartVerse);
-        let values = limit_scriptures.first(limit).all(&bible_db.to_owned()).await?;
-        return Ok(values)
+        let values = scripture_cursor
+            .first(limit)
+            .all(&bible_db.to_owned())
+            .await?;
+        return Ok(values);
     };
 
-    let values = scriputres.all(&bible_db.to_owned()).await?;
-    Ok(values)
+    let values = scripture_cursor.all(&bible_db.to_owned()).await?;
+    return Ok(values);
 }

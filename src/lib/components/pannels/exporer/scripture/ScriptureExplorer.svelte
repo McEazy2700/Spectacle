@@ -2,8 +2,8 @@
 	import { BibleBookChapterVerses, BibleBookChapters, BibleBooksList, BibleVersion } from '.';
 	import type { ScriptureResult } from '$lib/models/scripture';
 	import { invoke } from '@tauri-apps/api';
-	import activeScripture from '$lib/stores/activeScripture';
-	import scriptures from '$lib/stores/scriptures';
+	import activeScripture from '$lib/stores/active/scripture';
+	import scriptures from '$lib/stores/lists/scriptures';
 
 
 	$: {
